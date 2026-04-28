@@ -1,5 +1,6 @@
 -- Minimal Neovim config
 -- Work in progress
+-- Possible future additions: conform.nvm, nvim.lint
 
 -- Theme
 vim.opt.termguicolors = true
@@ -32,33 +33,43 @@ vim.opt.softtabstop = 4
 -- jk escape
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
--- Mini.files browser 
-vim.pack.add({ 'https://github.com/nvim-mini/mini.nvim' })
+-- Packages
+vim.pack.add({
+    'https://github.com/nvim-mini/mini.nvim', -- file tree
+    'https://github.com/windwp/nvim-autopairs', -- add pairs in insert mode
+    'https://github.com/mbbill/undotree', -- undotree
+    'https://github.com/ibhagwan/fzf-lua', -- fast fzf searching, requires fzf
+    'https://github.com/kylechui/nvim-surround', -- add pairs in visual/normal mode
+    'https://github.com/mason-org/mason.nvim', -- LSP package manager
+    'https://github.com/neovim/nvim-lspconfig', -- LSP configurations 
+    'https://github.com/mason-org/mason-lspconfig.nvim', -- links lspconfig and mason
+    'https://github.com/saghen/blink.lib', -- blink dependency
+    'https://github.com/Saghen/blink.cmp' -- code completion, requires rust tools
+})
+
+-- Setup packages w/ no additional configuration
+local packageDefaultSetup = {'nvim-autopairs', 'fzf-lua', 'mason', 'mason-lspconfig'}
+for _, val in ipairs(packageDefaultSetup) do
+    require(val).setup()
+end
+
+-- blink build and setup
+local cmp = require('blink.cmp')
+cmp.build():wait(60000)
+cmp.setup()
+
+-- Mini.files configuration 
 local minifiles = require('mini.files').setup({
     options = {
         use_as_default_explorer = true
     }
 })
-
--- Map mini.files to '-'
-vim.keymap.set('n', '-', function()
+vim.keymap.set('n', '-', function() -- Maps mini files to '-'
     local minifiles = require('mini.files')
     if not minifiles.close() then
         minifiles.open(vim.api.nvim_buf_get_name(0), true)
     end
 end, { desc = "Toggle mini.files menu" })
 
--- Auto pairing for open and closing characters 
-vim.pack.add({'https://github.com/windwp/nvim-autopairs'})
-require("nvim-autopairs").setup()
-
--- Undo tree 
-vim.pack.add({'https://github.com/mbbill/undotree'})
+-- Undo tree mapped to f5
 vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
-
--- Surround selections 
-vim.pack.add({'https://github.com/kylechui/nvim-surround'})
-
--- fzf for neovim
-vim.pack.add({'https://github.com/ibhagwan/fzf-lua'})
-require('fzf-lua').setup({})
