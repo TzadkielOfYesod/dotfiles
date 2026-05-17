@@ -1,5 +1,10 @@
 # Custom small zshrc
 
+# Environment Variables
+source ~/.config/zsh/env
+# Aliases
+source ~/.config/zsh/aliases
+
 # Set nvim to default editor
 export EDITOR='nvim'
 
