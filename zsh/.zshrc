@@ -76,9 +76,6 @@ bindkey -M vicmd '^e' edit-command-line
 bindkey -M visual '^[[P' vi-delete
 # SOURCE_END
 
-# Aliases
-alias vim='nvim'
-
 # Disable beep
 unsetopt BEEP
 
@@ -88,6 +85,10 @@ SAVEHIST=100000
 HISTFILE=~/.zsh_history
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST 
+
+# Completion
+setopt MENU_COMPLETE
 
 # Libraries
 source /usr/share/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
