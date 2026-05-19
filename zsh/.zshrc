@@ -89,6 +89,7 @@ setopt HIST_EXPIRE_DUPS_FIRST
 
 # Completion
 setopt MENU_COMPLETE
+bindkey '^[[Z' reverse-menu-complete
 
 # Libraries
 source /usr/share/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
