@@ -1,6 +1,5 @@
 -- Minimal Neovim config
 -- Work in progress
--- Possible future additions: conform.nvm, nvim.lint
 
 -- Theme
 vim.opt.termguicolors = true
@@ -73,3 +72,9 @@ end, { desc = "Toggle mini.files menu" })
 
 -- Undo tree mapped to f5
 vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
+
+-- Open Lazy Git
+vim.api.nvim_create_user_command("LGit", "terminal lazygit", {})
+
+-- View pre-save diff ("What's up?")
+vim.api.nvim_create_user_command("WUp", "w !diff % -", {})
