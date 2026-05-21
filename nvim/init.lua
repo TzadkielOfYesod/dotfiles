@@ -3,7 +3,7 @@
 
 -- Theme
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("sorbet")
+vim.cmd.colorscheme("retrobox")
 
 -- Line number
 vim.opt.number = true
@@ -32,6 +32,9 @@ vim.opt.softtabstop = 4
 -- jk escape
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
+-- Change default leader
+vim.g.mapleader = " "
+
 -- Packages
 vim.pack.add({
     'https://github.com/nvim-mini/mini.nvim', -- file tree
@@ -43,11 +46,12 @@ vim.pack.add({
     'https://github.com/neovim/nvim-lspconfig', -- LSP configurations 
     'https://github.com/mason-org/mason-lspconfig.nvim', -- links lspconfig and mason
     'https://github.com/saghen/blink.lib', -- blink dependency
-    'https://github.com/Saghen/blink.cmp' -- code completion, requires rust tools
+    'https://github.com/Saghen/blink.cmp', -- code completion, requires rust tools
+    'https://github.com/nvim-treesitter/nvim-treesitter-context' -- code context
 })
 
 -- Setup packages w/ no additional configuration
-local packageDefaultSetup = {'nvim-autopairs', 'fzf-lua', 'mason', 'mason-lspconfig'}
+local packageDefaultSetup = {'nvim-autopairs', 'mason', 'mason-lspconfig'}
 for _, val in ipairs(packageDefaultSetup) do
     require(val).setup()
 end
@@ -78,3 +82,8 @@ vim.api.nvim_create_user_command("LGit", "terminal lazygit", {})
 
 -- View pre-save diff ("What's up?")
 vim.api.nvim_create_user_command("WUp", "w !diff % -", {})
+
+-- Search current selection
+local fzf = require("fzf-lua")
+fzf.setup({ fzf_colors = true })
+vim.keymap.set("v", "<leader>fv", fzf.grep_visual, { desc = "FzfLua grep visual selection" })
