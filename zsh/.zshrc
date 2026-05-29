@@ -91,6 +91,10 @@ setopt HIST_EXPIRE_DUPS_FIRST
 setopt MENU_COMPLETE
 bindkey '^[[Z' reverse-menu-complete
 
+# Required for fzf-tab
+autoload -U compinit; compinit
+
 # Libraries
 source /usr/share/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/fzf-tab/fzf-tab.zsh
