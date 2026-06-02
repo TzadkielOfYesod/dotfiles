@@ -88,8 +88,8 @@ setopt SHARE_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST 
 
 # Basic directory bookmarking
-alias bkmrk="cat ~/.bookmarks | fzf"
-alias bkmrka="grep -xqF $(pwd) ~/.bookmarks || pwd >> ~/.bookmarks" # Append working directory as bookmark
+alias bkmrk='cat ~/.bookmarks | fzf'
+alias bkmrka='grep -xqF "$(pwd)" ~/.bookmarks || pwd >> ~/.bookmarks' # Append working directory as bookmark
 alias bkmrkd='sed -i "\|$(pwd)|d" ~/.bookmarks' # Drop working directory as bookmark 
 
 # Completion
