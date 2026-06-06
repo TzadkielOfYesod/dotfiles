@@ -12,7 +12,7 @@ export EDITOR='nvim'
 autoload -U colors && colors
 typeset -A ZSH_HIGHLIGHT_STYLES
 
-# Lambda function used to ensure that the color variables do no persist
+# Lambda to keep colors local 
 function() {
     local PASTEL_PURPLE='#C9B6E3'
     local PASTEL_PINK='#F3C7D6'
