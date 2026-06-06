@@ -10,25 +10,29 @@ export EDITOR='nvim'
 
 # Colors
 autoload -U colors && colors
-PASTEL_PURPLE=#C9B6E3
-PASTEL_PINK=#F3C7D6
-PASTEL_MINT=#C7EAD9
-PASTEL_PEACH=#FFD8B
-PASTEL_BLUE=#BEE5F9
-
-# Prompt
-PS1="[%F{${PASTEL_PURPLE}}%n%f@%F{${PASTEL_PINK}}%m%f] %F{${PASTEL_MINT}}%1~%f "
-
-# Syntax Highlighting Colors
 typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[command]='fg='$PASTEL_BLUE
-ZSH_HIGHLIGHT_STYLES[builtin]='fg='$PASTEL_BLUE
-ZSH_HIGHLIGHT_STYLES[function]='fg='$PASTEL_BLUE
-ZSH_HIGHLIGHT_STYLES[alias]='fg='$PASTEL_BLUE
+
+# Lambda function used to ensure that the color variables do no persist
+function() {
+    local PASTEL_PURPLE='#C9B6E3'
+    local PASTEL_PINK='#F3C7D6'
+    local PASTEL_MINT='#C7EAD9'
+    local PASTEL_PEACH='#FFD8B1'
+    local PASTEL_BLUE='#BEE5F9'
+
+    # Prompt
+    PS1="[%F{${PASTEL_PURPLE}}%n%f@%F{${PASTEL_PINK}}%m%f] %F{${PASTEL_MINT}}%1~%f "
+
+    # Syntax Highlighting Colors
+    ZSH_HIGHLIGHT_STYLES[command]='fg='$PASTEL_BLUE
+    ZSH_HIGHLIGHT_STYLES[builtin]='fg='$PASTEL_BLUE
+    ZSH_HIGHLIGHT_STYLES[function]='fg='$PASTEL_BLUE
+    ZSH_HIGHLIGHT_STYLES[alias]='fg='$PASTEL_BLUE
+}
 
 # Enable VI keybinds
 bindkey -v
-export KEYTEOUT=1
+export KEYTIMEOUT=1
 
 # Escape with JK
 bindkey -M viins 'jk' vi-cmd-mode
