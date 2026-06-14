@@ -1,5 +1,8 @@
 -- Minimal Neovim config
 -- Work in progress
+--
+-- Change default leader
+vim.g.mapleader = " "
 
 -- Theme
 vim.opt.termguicolors = true
@@ -32,9 +35,6 @@ vim.opt.softtabstop = 4
 -- jk escape
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
--- Change default leader
-vim.g.mapleader = " "
-
 -- Packages
 vim.pack.add({
     'https://github.com/nvim-mini/mini.nvim', -- file tree
@@ -47,14 +47,27 @@ vim.pack.add({
     'https://github.com/mason-org/mason-lspconfig.nvim', -- links lspconfig and mason
     'https://github.com/saghen/blink.lib', -- blink dependency
     'https://github.com/Saghen/blink.cmp', -- code completion, requires rust tools
-    'https://github.com/nvim-treesitter/nvim-treesitter-context' -- code context
+    'https://github.com/nvim-treesitter/nvim-treesitter-context', -- code context
+    'https://github.com/romus204/tree-sitter-manager.nvim', -- manage parsers 
+    'https://github.com/nvim-mini/mini.statusline' -- basic status line
 })
 
 -- Setup packages w/ no additional configuration
-local packageDefaultSetup = {'nvim-autopairs', 'mason', 'mason-lspconfig'}
+local packageDefaultSetup = {'nvim-autopairs', 'mason', 'mason-lspconfig', 'mini.statusline'}
 for _, val in ipairs(packageDefaultSetup) do
     require(val).setup()
 end
+
+-- treesitter config
+require('tree-sitter-manager').setup({
+    auto_install = true
+})
+
+-- Scope context 
+require('treesitter-context').setup({
+    enable = true,
+    mode = 'topline' -- you can also use cursor
+})
 
 -- blink build and setup
 local cmp = require('blink.cmp')
@@ -87,5 +100,5 @@ vim.api.nvim_create_user_command("WUp", "w !diff % -", {})
 local fzf = require("fzf-lua")
 fzf.setup({ fzf_colors = true })
 vim.keymap.set("v", "<leader>fv", fzf.grep_visual, { desc = "FzfLua grep visual selection" })
-vim.keymap.set("n", "<leader>ff", fzf.grep_visual, { desc = "Open FzfLua grep" })
+vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Open FzfLua files" })
 vim.keymap.set("n", "<leader>fl", fzf.lines, { desc = "Fzf current file" })
