@@ -99,6 +99,8 @@ vim.api.nvim_create_user_command("WUp", "w !diff % -", {})
 -- Search current selection
 local fzf = require("fzf-lua")
 fzf.setup({ fzf_colors = true })
-vim.keymap.set("v", "<leader>fv", fzf.grep_visual, { desc = "FzfLua grep visual selection" })
-vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Open FzfLua files" })
+vim.keymap.set("v", "<leader>fv", fzf.grep_visual, { desc = "Fzf selection" })
+vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Fzf files" })
 vim.keymap.set("n", "<leader>fl", fzf.lines, { desc = "Fzf current file" })
+vim.keymap.set("n", "<leader>fh", fzf.history, { desc = "Fzf history" })
+
