@@ -96,6 +96,15 @@ vim.api.nvim_create_user_command("LGit", "terminal lazygit", {})
 -- View pre-save diff ("What's up?")
 vim.api.nvim_create_user_command("WUp", "w !diff % -", {})
 
+-- Change Insert mode colors (retrobox)
+vim.api.nvim_set_hl(0, 'MiniStatuslineModeInsert', { bg = '#b16286', fg = '#1d2021'})
+
+-- Change Visual mode colors (retrobox)
+vim.api.nvim_set_hl(0, 'MiniStatuslineModeVisual', { bg = '#b8bb26', fg = '#32302f'})
+
+-- Change Command mode colors (retrobox)
+vim.api.nvim_set_hl(0, 'MiniStatuslineModeCommand', { bg = '#fb4934', fg = '#282828'})
+
 -- Search current selection
 local fzf = require("fzf-lua")
 fzf.setup({ fzf_colors = true })
