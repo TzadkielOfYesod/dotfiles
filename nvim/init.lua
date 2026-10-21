@@ -113,3 +113,14 @@ vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Fzf files" })
 vim.keymap.set("n", "<leader>fl", fzf.lines, { desc = "Fzf current file" })
 vim.keymap.set("n", "<leader>fh", fzf.history, { desc = "Fzf history" })
 
+-- Easy Markdown settings
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.opt_local.wrap = true
+        vim.opt_local.linebreak = true
+        vim.opt_local.spell = true
+        vim.keymap.set("n", "j", "gj", { noremap = true, silent = true })
+        vim.keymap.set("n", "k", "gk", { noremap = true, silent = true })
+    end
+})
